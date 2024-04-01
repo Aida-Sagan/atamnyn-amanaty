@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import styled from 'styled-components';
-import { Container, Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
-
+import { Container, Typography, TextField, Button } from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 
 const FormFields = () => {
@@ -31,9 +29,41 @@ const FormFields = () => {
     const [email, setEmail] = useState('');
     const [sourceOfInformation, setSourceOfInformation] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Здесь можно добавить логику для отправки данных формы на сервер
+    const navigateTo = useNavigate();
+
+    // Функция для сохранения данных формы в sessionStorage
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const formData = {
+            returnedFromWWII,
+            fio,
+            relativeName,
+            birthYear,
+            birthMonthDay,
+            birthYearRange,
+            birthCountry,
+            birthLocation,
+            conscriptionMonthYear,
+            maritalStatus,
+            childrenInfo,
+            relativesInDraft,
+            captivity,
+            captivityLocation,
+            uploadedFiles,
+            searcherFio,
+            phoneNumbers,
+            homeAddress,
+            email,
+            sourceOfInformation
+        };
+
+        if(!fio || !birthYearRange || !searcherFio || !phoneNumbers || !sourceOfInformation){
+            alert('Пожалуйста, заполните поля с "*" !')
+            return
+        }
+
+        sessionStorage.setItem('formData', JSON.stringify(formData));
+        navigateTo('/check-form');
     };
 
     const handleFileChange = (e) => {
@@ -46,7 +76,7 @@ const FormFields = () => {
             mt: '50px'
 
         }}>
-            <FormAnswers onSubmit={handleSubmit}>
+            <FormAnswers>
                 <Link to='/'>
                     <Typography
                         sx={{color: '#008B8B'}}
@@ -75,6 +105,7 @@ const FormFields = () => {
                     onChange={(e) => setFio(e.target.value)}
                     variant="outlined"
                     margin="normal"
+                    required
                 />
                 <TextField
                     label="Если известно, укажите имя прадеда, деда, отца разыскиваемого"
@@ -109,6 +140,7 @@ const FormFields = () => {
                     onChange={(e) => setBirthYearRange(e.target.value)}
                     variant="outlined"
                     margin="normal"
+                    required
                 />
 
                 <TextField
@@ -187,8 +219,8 @@ const FormFields = () => {
 
                     label="Прикрепить файлы, если необходимо:"
                     fullWidth
-                    value={searcherFio}
-                    onChange={(e) => setSearcherFio(e.target.value)}
+                    value={uploadedFiles}
+                    onChange={(e) => setUploadedFiles(e.target.value)}
                     variant="outlined"
                     margin="normal"
                 />
@@ -200,26 +232,28 @@ const FormFields = () => {
                 <TextField
                     label="ФИО кто ищет"
                     fullWidth
-                    value={phoneNumbers}
-                    onChange={(e) => setPhoneNumbers(e.target.value)}
+                    value={searcherFio}
+                    onChange={(e) => setSearcherFio(e.target.value)}
                     variant="outlined"
                     margin="normal"
+                    required
                 />
 
                 <TextField
                     label="Номер телефона (указать несколько)"
                     fullWidth
-                    value={homeAddress}
-                    onChange={(e) => setHomeAddress(e.target.value)}
+                    value={phoneNumbers}
+                    onChange={(e) => setPhoneNumbers(e.target.value)}
                     variant="outlined"
                     margin="normal"
+                    required
                 />
 
                 <TextField
                     label="Домашний адрес"
                     fullWidth
-                    value={fio}
-                    onChange={(e) => setFio(e.target.value)}
+                    value={homeAddress}
+                    onChange={(e) => setHomeAddress(e.target.value)}
                     variant="outlined"
                     margin="normal"
                 />
@@ -240,14 +274,31 @@ const FormFields = () => {
                     onChange={(e) => setSourceOfInformation(e.target.value)}
                     variant="outlined"
                     margin="normal"
+                    required
                 />
 
                 <Button
                     sx={{bgcolor: '#008B8B', borderRadius: '25px'}}
                     variant="contained"
                     type="submit"
-                >Отправить</Button>
+                    onClick={handleSubmit}
+                >Отправить
+                </Button>
             </FormAnswers>
+            <Box sx={{mt: '30px',}}>
+
+
+            <Button
+                sx={{bgcolor: 'rgba(3,37,37,0.62)', color: 'white'}}
+                variant="contained"
+            ><a href='example.pdf' download='example.pdf'>
+                Скачать образец заявки
+            </a>
+
+            </Button>
+
+            </Box>
+
         </Container>
     );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-
+import {Link} from 'react-router-dom';
+import {Button} from "@mui/material";
 export default function Header() {
     return (
         <HeaderContainer>
@@ -9,8 +10,8 @@ export default function Header() {
             </Logo>
             <Navigation>
                 <ul>
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/admin">Войти в админку</a></li>
+                    <li><Link to="/"><Button>Главная</Button></Link></li>
+                    <li><Link to='/sign-in'><Button> Войти в админку</Button></Link></li>
                 </ul>
             </Navigation>
         </HeaderContainer>

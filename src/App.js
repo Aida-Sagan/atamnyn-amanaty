@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home, FormFields } from '../src/pages';
+import { Home, FormFields, CheckForm, SuccessPage, Admin } from '../src/pages';
+import SignIn  from '../src/pages/sign-in/SignIn';
+
 import './App.css';
 
 function App() {
@@ -8,14 +10,26 @@ function App() {
       path: "/",
       element: <Home/>
     },
-    // {
-    //   path: "/signin",
-    //   element: <SignIn/>
-    // },
     {
       path: "/form",
       element: <FormFields/>
     },
+    {
+      path: "/check-form",
+      element: <CheckForm/>
+    },
+    {
+      path: '/success-page',
+      element: <SuccessPage/>
+    },
+    {
+      path: '/sign-in',
+      element: <SignIn/>
+    },
+    {
+      path: '/admin',
+      element: <Admin/>
+    }
 
   ])
 
