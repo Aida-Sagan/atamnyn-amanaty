@@ -7,7 +7,9 @@ import {
     TableBody,
     Typography,
     TableCell,
-    TableRow
+    TableRow,
+    Button,
+    Box
 } from "@mui/material";
 import {Link} from 'react-router-dom';
 
@@ -19,7 +21,7 @@ export default function Admin() {
         const savedData = sessionStorage.getItem('formData');
         if (savedData) {
             const parsedData = JSON.parse(savedData);
-            setFormDataList([parsedData]); // Преобразовываем данные в массив и устанавливаем их в состояние
+            setFormDataList([parsedData]);
         }
     }, []);
 
@@ -30,7 +32,12 @@ export default function Admin() {
             overflowX: 'auto',
             width: '100%'
         }}>
-            <Typography variant="h4" sx={{ marginTop: '20px', marginBottom: '10px' }}>Список заявок</Typography>
+            <Box sx={{display: 'flex', justifyContent: 'end'}}>
+                <Link to='/'><Button sx={{ marginTop: '20px', border: '1px solid blue' }}>Вернуться на главную</Button></Link>
+            </Box>
+
+
+            <Typography variant="h4" sx={{ marginBottom: '10px' }}>Список заявок</Typography>
             <TextField
                 label="Поиск"
                 value={searchData}

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home, FormFields, CheckForm, SuccessPage, Admin } from '../src/pages';
+import { Home, FormFields, CheckForm, SuccessPage, Admin, ApplicationPage } from '../src/pages';
 import SignIn  from '../src/pages/sign-in/SignIn';
 
 import './App.css';
@@ -29,6 +29,10 @@ function App() {
     {
       path: '/admin',
       element: <Admin/>
+    },
+    {
+      path: 'page-application/{query}',
+      element: <ApplicationPage/>
     }
 
   ])

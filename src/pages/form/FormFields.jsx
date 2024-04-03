@@ -57,6 +57,7 @@ const FormFields = () => {
             sourceOfInformation
         };
 
+
         if(!fio || !birthYearRange || !searcherFio || !phoneNumbers || !sourceOfInformation){
             alert('Пожалуйста, заполните поля с "*" !')
             return
@@ -69,6 +70,7 @@ const FormFields = () => {
     const handleFileChange = (e) => {
         setUploadedFiles(e.target.files);
     };
+
 
     return (
         <Container sx={{
@@ -287,16 +289,12 @@ const FormFields = () => {
             </FormAnswers>
             <Box sx={{mt: '30px',}}>
 
-
-            <Button
-                sx={{bgcolor: 'rgba(3,37,37,0.62)', color: 'white'}}
-                variant="contained"
-            ><a href='example.pdf' download='example.pdf'>
-                Скачать образец заявки
-            </a>
-
+            <Button variant="contained">
+                <a className='btn' href='https://drive.google.com/file/d/1H3U4DQvxiKUdTSc2AbjJG0v8NrQmrRwH/view?usp=sharing' target='_blank'
+                   download style={{ textDecoration: 'none', color: 'inherit' }}>
+                    Скачать образец заявки
+                </a>
             </Button>
-
             </Box>
 
         </Container>

@@ -26,6 +26,8 @@ export default function CheckForm() {
         sourceOfInformation: '',
     });
 
+    const navigateTo = useNavigate();
+
 
     // Получение данных из sessionStorage при загрузке компонента
     useEffect(() => {
@@ -34,8 +36,6 @@ export default function CheckForm() {
             setFormData(JSON.parse(savedData));
         }
     }, []);
-
-    const navigateTo = useNavigate();
 
     const handleFileChange = (event) => {
         const files = event.target.files;

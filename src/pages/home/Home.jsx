@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Block = ({ title, value }) => (
@@ -30,18 +30,19 @@ const Block = ({ title, value }) => (
 );
 
 export default function Home() {
-    const [openModal, setOpenModal] = useState(false);
     const [query, setQuery] = useState('');
 
-    const handleQuerySubmit = () => {
-        // выполнить логику для запроса статуса заявки
-        setOpenModal(true);
-    };
+    const navigateTo = useNavigate();
 
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
+    const handleAboutStatus = () => {
+        const numChecker = /^[0-9]+$/;
 
+        if(numChecker.test(query)){
+            navigateTo('/page-application/{query}')
+        } else {
+            alert('Введите верный номер Вашей заявки')
+        }
+    }
 
     return (
         <Container sx={{
@@ -55,14 +56,17 @@ export default function Home() {
             <Title>
                 ATAMNYN AMANATY
             </Title>
-            <Box sx={{display: 'flex', justifyContent: 'space-between', mb: '50px'}}>
-                <TextHello>
+            <Box sx={{display: 'flex', justifyContent: 'space-between', mb: '50px',}}>
+
+                <TextHello >
                     Мы рады приветствовать Вас на сайте ОО "ATAMNYN AMANATY", посвященному
                     поиску родственников и солдат, пропавших без вести в годы Великой Отечественной войны.
                     Мы готовы помочь
                     Вам в поиске своего деда и восстановлении истории вашей семьи. Заполните нашу форму поиска,
                     и давайте вместе вернем память о наших героях.
                 </TextHello>
+
+
 
                 <Box sx={{
                     display: 'flex',
@@ -106,18 +110,11 @@ export default function Home() {
                     />
                     <Button variant="contained"
                             sx={{bgcolor: '#195c6b'}}
-                            onClick={handleQuerySubmit}>
+                            onClick={handleAboutStatus}>
                         Узнать статус</Button>
                 </Box>
             </Box>
 
-            <Modal open={openModal} onClose={handleCloseModal}>
-                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: '5px' }}>
-                    <Typography variant="h6" id="modal-modal-title">Статус заявки</Typography>
-                    <Typography variant="body1" id="modal-modal-description">Статус вашей заявки здесь.</Typography>
-                    <Button onClick={handleCloseModal}>Закрыть</Button>
-                </Box>
-            </Modal>
         </Container>
     )
 }
