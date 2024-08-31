@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, Button, IconButton } from '@mui/material';
+import Brightness2Icon from '@mui/icons-material/Brightness2';
+import { lightTheme, darkTheme } from './utils/theme';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginForm from './pages/SignInPage/SignInPage';
+import Home from './pages/Home/Home';
+import FormFields from './pages/FormPage/FormFields';
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+
+  const handleThemeChange = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const appliedTheme = theme === 'light' ? lightTheme : darkTheme;
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home/>
+    },
+    {
+      path: "/validation",
+      element: <FormFields/>
+    },
+    {
+      path: '/auth/sign-in',
+      element: <LoginForm/>
+    }
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <ThemeProvider theme={appliedTheme}>
+        <CssBaseline />
+
+        <RouterProvider router={router} />
+        <IconButton
+            onClick={handleThemeChange}
+            sx={{
+              position: 'absolute',
+              top: 80,
+              right: 66,
+              color: theme === 'light' ? '#000000' : '#FFFFFF',
+              border: '2px solid #0A2640',
+            }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Brightness2Icon />
+        </IconButton>
+      </ThemeProvider>
   );
 }
 
