@@ -21,7 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 
 package.json
 package-lock.json
 tsconfig.json
+=======
+>>>>>>> 4f880e4740470fc8fc35751e51c3e85bb433a5c9
