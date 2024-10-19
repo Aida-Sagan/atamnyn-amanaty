@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { Formik, Form, Field, useFormikContext } from 'formik';
 import * as Yup from 'yup';
-import {Button, Stack, TextField, Typography} from '@mui/material';
+import { Button, Stack, TextField, Typography, Box } from '@mui/material';
 
 interface FormValues {
     email: string;
@@ -11,24 +10,47 @@ interface FormValues {
 
 const LoginForm = () => {
     return (
-        <Formik
-            initialValues={{
-                email: '',
-                password: '',
-            }}
-            validationSchema={Yup.object({
-                email: Yup.string().email('Неверный почтовый адрес').required('Заполните это поле'),
-                password: Yup.string().required('Заполните это поле'),
-            })}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                padding: '16px',
             }}
         >
-            <LoginFormInner />
-        </Formik>
+            <Box
+                sx={{
+                    backgroundColor: 'rgba(255,255,255,0.18)',
+                    borderRadius: '8px',
+                    boxShadow: '4px 4px 8px rgba(0,0,0,0.1)',
+                    padding: '32px',
+                    width: '400px',
+                }}
+            >
+                <Typography variant="h4" align="center" gutterBottom>
+                    Вход
+                </Typography>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: '',
+                    }}
+                    validationSchema={Yup.object({
+                        email: Yup.string().email('Неверный почтовый адрес').required('Заполните это поле'),
+                        password: Yup.string().required('Заполните это поле'),
+                    })}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                        }, 400);
+                    }}
+                >
+                    <LoginFormInner />
+                </Formik>
+            </Box>
+        </Box>
     );
 };
 
@@ -37,9 +59,6 @@ const LoginFormInner = () => {
 
     return (
         <Form>
-            <Typography variant="h5" sx={{display: 'flex', justifyContent: 'center'}}>
-                Войти в кабинет админа
-            </Typography>
             <Stack spacing={4}>
                 <Field
                     name="email"
@@ -70,7 +89,6 @@ const LoginFormInner = () => {
                 >
                     {formik.isSubmitting ? 'Переходит...' : 'Войти'}
                 </Button>
-
             </Stack>
         </Form>
     );

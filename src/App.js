@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Button, IconButton } from '@mui/material';
+import { CssBaseline, IconButton } from '@mui/material';
 import Brightness2Icon from '@mui/icons-material/Brightness2';
 import { lightTheme, darkTheme } from './utils/theme';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginForm from './pages/SignInPage/SignInPage';
 import Home from './pages/Home/Home';
 import FormFields from './pages/FormPage/FormFields';
+import Admin from './pages/Admin/Admin';
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -29,7 +30,11 @@ function App() {
     {
       path: '/auth/sign-in',
       element: <LoginForm/>
-    }
+    },
+      {
+          path: '/auth/admin',
+          element: <Admin/>
+      }
   ]);
 
   return (
@@ -41,7 +46,7 @@ function App() {
             onClick={handleThemeChange}
             sx={{
               position: 'absolute',
-              top: 80,
+              top: 20,
               right: 66,
               color: theme === 'light' ? '#000000' : '#FFFFFF',
               border: '2px solid #0A2640',

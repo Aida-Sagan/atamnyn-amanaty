@@ -3,23 +3,11 @@ import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Checkbox,
 import { useTranslation } from 'react-i18next';
 
 const FormComponents = ({ formData, handleChange, handleLanguageChange, handleSubmit }) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: 'auto' }}>
             <h1>{t('form.pageTitle')}</h1>
-            <FormControl fullWidth style={{ maxWidth: '200px', margin: 'normal' }}>
-                <InputLabel id="language-select-label">{t('form.language')}</InputLabel>
-                <Select
-                    labelId="language-select-label"
-                    value={i18n.language}
-                    onChange={handleLanguageChange}
-                    style={{ fontSize: '0.875rem' }}
-                >
-                    <MenuItem value="kk">Қазақша</MenuItem>
-                    <MenuItem value="ru">Русский</MenuItem>
-                </Select>
-            </FormControl>
 
             <FormControl fullWidth margin="normal">
                 <InputLabel id="looking-for-label">{t('form.lookingFor')}</InputLabel>
@@ -281,9 +269,15 @@ const FormComponents = ({ formData, handleChange, handleLanguageChange, handleSu
                 />
             )}
 
-            <Button variant="contained" color="primary" type="submit">
+            <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ mt: 5, mb: 5, width: '250px', borderRadius: '20px' }}
+            >
                 {t('form.submit')}
             </Button>
+
         </form>
     );
 };

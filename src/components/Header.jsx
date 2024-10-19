@@ -14,10 +14,10 @@ const Header = () => {
         i18n.changeLanguage(event.target.value);
     };
     return (
-        <header style={{ display: 'flex', justifyContent: 'center'}}>
-            <Box display="flex" alignItems='end' justifyContent="end" >
+        <header style={{ marginLeft: '40px'}} >
+            <Box display="flex" alignItems='end' justifyContent="space-between" p={3}  >
                 <Link to="/" style={{ marginRight: 'auto' }}>
-                    <img src={logo} alt="Logo" style={{ width: '35%' }} />
+                    <img src={logo} alt="Logo" style={{  width: '35%' }} />
                 </Link>
 
                 <Box textAlign="center" p={3} style={{ marginLeft: 'auto' }}>
